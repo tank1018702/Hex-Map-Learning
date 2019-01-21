@@ -11,6 +11,8 @@ public class HexMapEditor : MonoBehaviour
 
     private Color activeColor;
 
+    int activeElevation;
+
     void Awake()
     {
         SelectColor(0);
@@ -30,13 +32,28 @@ public class HexMapEditor : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(inputRay, out hit))
         {
-            hexGrid.ColorCell(hit.point, activeColor);
+            EditCell(hexGrid.GetCell(hit.point));
+            //hexGrid.ColorCell(hit.point, activeColor);
             //hexGrid.TouchCell(hit.point);
         }
+    }
+
+    void EditCell(HexCell cell)
+    {
+        cell.color = activeColor;
+        cell.Elevation = activeElevation;
+        hexGrid.Refresh();
     }
 
     public void SelectColor(int index)
     {
         activeColor = colors[index];
     }
+
+    public void SetEvelation(float evelation)
+    {
+        activeElevation = (int)evelation;
+        Debug.Log(activeElevation);
+    }
+
 }

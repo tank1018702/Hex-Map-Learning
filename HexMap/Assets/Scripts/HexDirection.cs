@@ -26,3 +26,8 @@ public static class HexDirectionExtensions
     }
 
 }
+
+public enum HexEdgeType
+{
+    Flat,Slope,Cliff
+}
