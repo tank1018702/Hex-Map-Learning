@@ -19,8 +19,19 @@ public class HexGrid : MonoBehaviour
 
     HexCell[] cells;
 
+    public Texture2D noiseSource;
+
+
+    private void OnEnable()
+    {
+        HexMetrics.noiseSource = noiseSource;
+    }
+
+
     private void Awake()
     {
+        HexMetrics.noiseSource = noiseSource;
+
         gridCanvas = GetComponentInChildren<Canvas>();
         hexMesh = GetComponentInChildren<HexMesh>();
 
@@ -88,8 +99,9 @@ public class HexGrid : MonoBehaviour
         label.rectTransform.anchoredPosition = new Vector2(position.x, position.z);
 
         label.text = cell.coordinates.ToStringOnSpearateLines();
-
         cell.uiRect = label.rectTransform;
+        cell.Elevation = 0;
+
 
     }
 
