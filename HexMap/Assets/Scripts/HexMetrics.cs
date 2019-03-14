@@ -4,9 +4,11 @@ using UnityEngine;
 
 public static class HexMetrics
 {
-    public const float outerRadius = 10f;
+    public const float outerToInner = 0.866025404f;
+    public const float innerToOuter = 1f / outerToInner;
 
-    public const float innerRadius= outerRadius * 0.866025404f;
+    public const float outerRadius = 10f;
+    public const float innerRadius= outerRadius * outerToInner;
 
     public const float solidFactor = 0.8f;
 
@@ -31,6 +33,10 @@ public static class HexMetrics
     public static Texture2D noiseSource;
 
     public const int chunkSizeX = 5,chunkSizeZ=5;
+
+    public const float streamBedElevationOffset = -1.75f;
+
+    public const float riverSurfaceElevationOffset = -0.5f;
 
     static Vector3[] corners =
     {
@@ -105,4 +111,20 @@ public static class HexMetrics
     {
         return noiseSource.GetPixelBilinear(position.x*noiseScale, position.z*noiseScale);
     }
+
+    public static Vector3 GetSolidEdgeMiddle(HexDirection direction)
+    {
+        return (corners[(int)direction] + corners[(int)direction + 1]) * (0.5f * solidFactor);
+    }
+
+   public static Vector3 Perturb(Vector3 position)
+    {
+        Vector4 sample = SampleNoise(position);
+        position.x += (sample.x * 2f - 1f) * cellPerturbStrength;
+        //position.y += (sample.y * 2f - 1f) * HexMetrics.cellPerturbStrength;
+        position.z += (sample.z * 2f - 1f) * cellPerturbStrength;
+
+        return position;
+    }
+    
 }

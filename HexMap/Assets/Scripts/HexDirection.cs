@@ -25,6 +25,19 @@ public static class HexDirectionExtensions
         return direction == HexDirection.NW ? HexDirection.NE : (direction + 1);
     }
 
+    public static HexDirection Previous2(this HexDirection direction)
+    {
+        direction -= 2;
+        return direction >= HexDirection.NE ? direction : (direction + 6);
+    }
+
+    public static HexDirection Next2(this HexDirection direction)
+    {
+        direction += 2;
+        return direction <= HexDirection.NW ? direction : (direction - 6);
+    }
+
+
 }
 
 public enum HexEdgeType
