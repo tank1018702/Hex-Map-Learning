@@ -71,6 +71,7 @@
     <Compile Include="Assets\Scripts\HexMetrics.cs" />
     <Compile Include="Assets\Scripts\ListPool.cs" />
     <None Include="Assets\Shader\River.shader" />
+    <None Include="Assets\Shader\Road.shader" />
     <None Include="Assets\Shader\VertexColors.shader" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>F:/tank1018702/Hex Map/HexMap/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
