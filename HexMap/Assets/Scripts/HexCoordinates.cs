@@ -80,10 +80,12 @@ public struct HexCoordinates
         return new HexCoordinates(iX, iZ);
     }
 }
-
+/// <summary>
+/// 边缘顶点,一组5个
+/// </summary>
 public struct EdgeVertices
 {
-    public Vector3 v1, v2,v3, v4, v5;
+    public Vector3 v1, v2, v3, v4, v5;
 
     public EdgeVertices(Vector3 corner1,Vector3 corner2)
     {
@@ -110,7 +112,6 @@ public struct EdgeVertices
         result.v3 = HexMetrics.TerraceLerp(a.v3, b.v3, t);
         result.v4 = HexMetrics.TerraceLerp(a.v4, b.v4, t);
         result.v5 = HexMetrics.TerraceLerp(a.v5, b.v5, t);
-
         return result;
     }
 }
