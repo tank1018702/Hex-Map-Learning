@@ -29,6 +29,8 @@ public class HexCell : MonoBehaviour
     [SerializeField]
     HexCell[] neighbors;
 
+
+
     private int elevation = int.MinValue;
     public int Elevation
     {
@@ -80,6 +82,60 @@ public class HexCell : MonoBehaviour
             return transform.localPosition;
         }
     }
+    #region feature
+    public int UrbanLevel
+    {
+        get
+        {
+            return urbanLevel;
+        }
+        set
+        {
+            if(urbanLevel!=value)
+            {
+                urbanLevel = value;
+                RefreshSelfOnly();
+            }
+        }
+    }
+
+    
+
+    public int Farmlevel
+    {
+        get
+        {
+            return farmLevel;
+        }
+        set
+        {
+            if(farmLevel!=value)
+            {
+                farmLevel = value;
+                RefreshSelfOnly();
+            }
+        }
+    }
+
+    public int PlantLevel
+    {
+        get
+        {
+            return plantLevel;
+        }
+        set
+        {
+            if(plantLevel!=value)
+            {
+                plantLevel = value;
+                RefreshSelfOnly();
+            }
+        }
+    }
+
+    int urbanLevel,farmLevel,plantLevel;
+
+    #endregion
 
     #region roads
     [SerializeField]
