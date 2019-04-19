@@ -34,7 +34,7 @@ public class HexMapEditor : MonoBehaviour
         Ignore,Yes,No
     }
 
-    OptionalToggle riverMode,roadMode;
+    OptionalToggle riverMode,roadMode,walledMode;
 
     void Awake()
     {
@@ -51,6 +51,11 @@ public class HexMapEditor : MonoBehaviour
         {
             previousCell = null;
         }
+    }
+
+    public void SetWalledMode(int mode)
+    {
+        walledMode = (OptionalToggle)mode;
     }
 
     public void SetApplyUrbanLevel(bool toggle)
@@ -166,6 +171,10 @@ public class HexMapEditor : MonoBehaviour
             if(applyUrbanLevel)
             {
                 cell.UrbanLevel = activeUrbanLevel;
+            }
+            if(walledMode!=OptionalToggle.Ignore)
+            {
+                cell.Walled = walledMode == OptionalToggle.Yes;
             }
             if(applyFarmLevel)
             {

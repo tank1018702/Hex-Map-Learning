@@ -135,6 +135,23 @@ public class HexCell : MonoBehaviour
 
     int urbanLevel,farmLevel,plantLevel;
 
+    public bool Walled
+    {
+        get
+        {
+            return walled;
+        }
+        set
+        {
+            if(walled!=value)
+            {
+                walled = value;   
+                Refresh();
+            }
+        }
+    }
+    bool walled;
+
     #endregion
 
     #region roads
