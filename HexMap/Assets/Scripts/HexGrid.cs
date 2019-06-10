@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
 
 public class HexGrid : MonoBehaviour
 {
@@ -18,11 +19,13 @@ public class HexGrid : MonoBehaviour
 
     public int seed;
 
+    public Color[] colors;
+
     //Canvas gridCanvas;
 
     //HexMesh hexMesh;
 
-
+   
     HexCell[] cells;
 
     public Texture2D noiseSource;
@@ -34,10 +37,13 @@ public class HexGrid : MonoBehaviour
 
     private void OnEnable()
     {
+  
+ 
         if(!HexMetrics.noiseSource)
         {
             HexMetrics.noiseSource = noiseSource;
             HexMetrics.InitializeHashGrid(seed);
+            HexMetrics.colors = colors;
         }
         
     }
@@ -47,6 +53,7 @@ public class HexGrid : MonoBehaviour
     {
         HexMetrics.noiseSource = noiseSource;
         HexMetrics.InitializeHashGrid(seed);
+        HexMetrics.colors = colors;
 
         //gridCanvas = GetComponentInChildren<Canvas>();
         //hexMesh = GetComponentInChildren<HexMesh>();
@@ -86,12 +93,7 @@ public class HexGrid : MonoBehaviour
         }
     }
 
-    //private void Start()
-    //{
-        
-    //    hexMesh.TriangulateAll(cells);
-        
-    //}
+   
 
     void CreateCell(int x,int z,int i)
     {
@@ -108,7 +110,7 @@ public class HexGrid : MonoBehaviour
         cell.transform.localPosition = position;
 
         cell.coordinates = HexCoordinates.FromOffsetCoordinates(x, z);
-        cell.Color = Color.white;
+        
 
         if(x>0)
         {
@@ -163,8 +165,7 @@ public class HexGrid : MonoBehaviour
         position = transform.InverseTransformPoint(position);
         HexCoordinates coordinates = HexCoordinates.FromPosition(position);
         int index = coordinates.X + coordinates.Z * cellCountX + coordinates.Z / 2;
-        //HexCell cell = cells[index];
-        //cell.Color = Color;
+      
         
         return cells[index];     
     }
@@ -187,8 +188,25 @@ public class HexGrid : MonoBehaviour
             chunks[i].ShowLabelUI(visible);
         }
     }
-    //public  void Refresh()
-    //{
-    //    hexMesh.TriangulateAll(cells);
-    //}
+
+    public void Save(BinaryWriter writer)
+    {
+        for(int i=0;i<cells.Length;i++)
+        {
+            cells[i].Save(writer);
+        }
+    }
+
+    public void Load(BinaryReader reader)
+    {
+        for(int i=0;i<cells.Length;i++)
+        {
+            cells[i].Load(reader);
+        }
+        for(int i=0;i<chunks.Length;i++)
+        {
+            chunks[i].Refresh();
+        }
+    }
+
 }

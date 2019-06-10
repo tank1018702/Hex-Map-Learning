@@ -40,7 +40,6 @@ public class HexMapCamera : MonoBehaviour
             AdjustRotation(rotationDelta);
         }
     
-
         float xDelta = Input.GetAxis("Horizontal");
         float zDelta = Input.GetAxis("Vertical");
         if(xDelta!=0f||zDelta!=0f)
