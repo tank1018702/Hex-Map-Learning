@@ -272,34 +272,4 @@ public class HexMapEditor : MonoBehaviour
         activeWaterLevel = (int)level;
     }
 
-    public void Save()
-    {
-        Debug.Log(Application.persistentDataPath);
-        string path = Path.Combine(Application.persistentDataPath, "test.map");
-        using (BinaryWriter writer = new BinaryWriter(File.Open(path, FileMode.Create)))
-        {
-            //writer.Write(123);
-            writer.Write(0);
-            hexGrid.Save(writer);
-        }
-    }
-
-    public void Load()
-    {
-        string path = Path.Combine(Application.persistentDataPath, "test.map");
-        using (BinaryReader reader = new BinaryReader(File.OpenRead(path)))
-        {
-            //Debug.Log(reader.ReadInt32());
-            int header = reader.ReadInt32();
-            if(header==0)
-            {
-                hexGrid.Load(reader);
-            }
-            else
-            {
-                Debug.LogWarning("Unknow map format" + header);
-            }
-          
-        }
-    }
 }

@@ -71,6 +71,9 @@
     <Compile Include="Assets\Scripts\HexMesh.cs" />
     <Compile Include="Assets\Scripts\HexMetrics.cs" />
     <Compile Include="Assets\Scripts\ListPool.cs" />
+    <Compile Include="Assets\Scripts\NewMapMenu.cs" />
+    <Compile Include="Assets\Scripts\SaveLoadItem.cs" />
+    <Compile Include="Assets\Scripts\SaveLoadMenu.cs" />
     <None Include="Assets\Shader\River.shader" />
     <None Include="Assets\Shader\Estuaries.shader" />
     <None Include="Assets\Shader\WaterCg.cginc" />
