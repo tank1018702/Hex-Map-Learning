@@ -141,6 +141,6 @@ public class SaveLoadMenu : MonoBehaviour
         {
             File.Delete(path);
         }
-        
+        FillList();
     }
 }

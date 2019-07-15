@@ -526,12 +526,6 @@ MonoBehaviour:
   cellLabelPrefab: {fileID: 7581049527329451886, guid: 5cf5509c21fc4b041baa627c3bbb1052,
     type: 3}
   seed: 1234
-  colors:
-  - {r: 1, g: 1, b: 0, a: 0}
-  - {r: 0, g: 1, b: 0, a: 0}
-  - {r: 0, g: 0, b: 1, a: 0}
-  - {r: 1, g: 0.36855862, b: 0, a: 0}
-  - {r: 1, g: 1, b: 1, a: 0}
   noiseSource: {fileID: 2800000, guid: c0439aa12452bd044964707ab6491186, type: 3}
   chunkPrefab: {fileID: 5782035000335308524, guid: dece4770cd062a343b81ccebc30cd63a,
     type: 3}
@@ -3930,7 +3924,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u6A59"
+  m_Text: "\u5CA9\u77F3"
 --- !u!222 &531184020
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5706,7 +5700,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 851566869}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 790751545}
+        m_MethodName: Delete
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &851566869
@@ -6000,7 +6005,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u989C\u8272"
+  m_Text: "\u5730\u5F62\u7C7B\u578B"
 --- !u!222 &930628830
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9029,7 +9034,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u7EFF"
+  m_Text: "\u8349\u5730"
 --- !u!222 &1336195982
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9446,7 +9451,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u767D"
+  m_Text: "\u96EA\u5730"
 --- !u!222 &1373989540
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11627,7 +11632,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u9EC4"
+  m_Text: "\u6C99\u6F20"
 --- !u!222 &1711904636
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13608,7 +13613,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u84DD"
+  m_Text: "\u6CE5\u5730"
 --- !u!222 &1916277525
 CanvasRenderer:
   m_ObjectHideFlags: 0

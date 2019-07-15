@@ -20,13 +20,6 @@ public class HexGrid : MonoBehaviour
     public Text cellLabelPrefab;
 
     public int seed;
-
-    public Color[] colors;
-
-    //Canvas gridCanvas;
-
-    //HexMesh hexMesh;
-
    
     HexCell[] cells;
 
@@ -39,15 +32,11 @@ public class HexGrid : MonoBehaviour
 
     private void OnEnable()
     {
-  
- 
         if(!HexMetrics.noiseSource)
         {
             HexMetrics.noiseSource = noiseSource;
             HexMetrics.InitializeHashGrid(seed);
-            HexMetrics.colors = colors;
-        }
-        
+        }    
     }
 
 
@@ -55,14 +44,8 @@ public class HexGrid : MonoBehaviour
     {
         HexMetrics.noiseSource = noiseSource;
         HexMetrics.InitializeHashGrid(seed);
-        HexMetrics.colors = colors;
 
-        //gridCanvas = GetComponentInChildren<Canvas>();
-        //hexMesh = GetComponentInChildren<HexMesh>();
         CreateMap(cellCountX, cellCountZ);
-
-       
-      
     }
 
     public bool CreateMap(int x,int z)

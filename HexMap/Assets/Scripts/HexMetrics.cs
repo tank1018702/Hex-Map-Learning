@@ -62,8 +62,6 @@ public static class HexMetrics
 
     public const float bridgeDesignLength = 7f;
 
-    public static Color[] colors;
-
     public static Vector3 WallThicknessOffset(Vector3 near,Vector3 far)
     {
         Vector3 offset;

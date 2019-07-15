@@ -29,17 +29,6 @@ public class HexCell : MonoBehaviour
         }
     }
 
-
-    public Color Color
-    {
-        get
-        {
-
-            return HexMetrics.colors[terrainTypeIndex];
-        }
-    
-    }
-
     public RectTransform uiRect;
 
     [SerializeField]
