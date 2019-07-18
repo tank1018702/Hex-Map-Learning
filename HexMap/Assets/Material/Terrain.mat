@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Terrain
   m_Shader: {fileID: 4800000, guid: d5104c9e74bf41a45914e9e1d5b3b73f, type: 3}
-  m_ShaderKeywords: 
+  m_ShaderKeywords: GRID_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
