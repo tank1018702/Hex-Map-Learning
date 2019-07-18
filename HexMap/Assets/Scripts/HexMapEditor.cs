@@ -11,11 +11,11 @@ public class HexMapEditor : MonoBehaviour
 
     public HexGrid hexGrid;
 
-    
+    public Material terrainMaterial;
 
     int activeElevation;
     int activeWaterLevel;
-    int activeTerrainTypeIndex;
+    int activeTerrainTypeIndex; 
 
     bool applyColor;
     bool applyElevation;
@@ -29,7 +29,13 @@ public class HexMapEditor : MonoBehaviour
 
     bool applyUrbanLevel, applyFarmLevel,applyPlantLevel,applySpecialIndex;
 
+    bool editMode;
 
+
+    private void Awake()
+    {
+        terrainMaterial.DisableKeyword("GRID_ON");
+    }
 
 
     enum OptionalToggle
@@ -115,7 +121,15 @@ public class HexMapEditor : MonoBehaviour
             {
                 isDrag = false;
             }
-            EditCells(currentCell);
+
+            if(editMode)
+            {
+                EditCells(currentCell);
+            }
+            else
+            {
+                hexGrid.FindDistancesTo(currentCell);
+            }
             previousCell = currentCell;
 
             //hexGrid.ColorCell(hit.point, activeColor);
@@ -270,6 +284,25 @@ public class HexMapEditor : MonoBehaviour
     public void SetWaterLevel(float  level)
     {
         activeWaterLevel = (int)level;
+    }
+
+    public void ShowGrid (bool visible)
+    {
+
+        if(visible)
+        {
+            terrainMaterial.EnableKeyword("GRID_ON");
+        }
+        else
+        {
+            terrainMaterial.DisableKeyword("GRID_ON");
+        }
+    }
+
+    public void SetEditMode(bool toggle)
+    {
+        editMode = toggle;
+        hexGrid.ShowLabelUI(!toggle);
     }
 
 }

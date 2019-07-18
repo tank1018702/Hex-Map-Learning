@@ -79,6 +79,12 @@ public struct HexCoordinates
 
         return new HexCoordinates(iX, iZ);
     }
+
+    public int DistanceTo(HexCoordinates other)
+    {
+        return (Mathf.Abs(X - other.X)+Mathf.Abs(Y-other.Y)+Mathf.Abs(Z-other.Z))/2;
+    }
+
 }
 /// <summary>
 /// 边缘顶点,一组5个

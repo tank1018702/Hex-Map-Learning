@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using UnityEngine.UI;
 
 
 public class HexCell : MonoBehaviour
@@ -9,6 +10,21 @@ public class HexCell : MonoBehaviour
 
     public HexGridChunk chunk;
     public HexCoordinates coordinates;
+
+    int distance;
+
+    public int Distance
+    {
+        get
+        {
+            return distance;
+        }
+        set
+        {
+            distance = value;
+            UpdateDistanceLabel();
+        }
+    }
 
   
     int terrainTypeIndex;
@@ -426,7 +442,7 @@ public class HexCell : MonoBehaviour
         }
     }
 
-    public bool isUnderwater
+    public bool IsUnderwater
     {
         get
         {
@@ -582,5 +598,11 @@ public class HexCell : MonoBehaviour
         {
             roads[i] = (roadFlags & (1 << i)) != 0;
         }
+    }
+
+    void UpdateDistanceLabel()
+    {
+        Text label = uiRect.GetComponent<Text>();
+        label.text = distance==int.MaxValue?"":distance.ToString();
     }
 }

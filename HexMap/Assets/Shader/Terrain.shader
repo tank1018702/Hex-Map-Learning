@@ -4,6 +4,7 @@
     {
         _Color ("Color", Color) = (1,1,1,1)
         _MainTex ("Terrain Texture Array", 2DArray) = "white" {}
+		_GridTex("Grid Texture",2D) = "white"{}
         _Glossiness ("Smoothness", Range(0,1)) = 0.5
         _Metallic ("Metallic", Range(0,1)) = 0.0
     }
@@ -18,6 +19,11 @@
 
         // Use shader model 3.0 target, to get nicer looking lighting
         #pragma target 3.5
+
+       
+        #pragma multi_compile _ GRID_ON
+
+
 
 	    UNITY_DECLARE_TEX2DARRAY(_MainTex);
 
@@ -37,6 +43,7 @@
         half _Glossiness;
         half _Metallic;
         fixed4 _Color;
+		sampler2D _GridTex;
 
  
         UNITY_INSTANCING_BUFFER_START(Props)
@@ -54,9 +61,16 @@
 			fixed4 c= GetTerrainColor(IN, 0) +
 				      GetTerrainColor(IN, 1) +
 				      GetTerrainColor(IN, 2);
-			
-          /*  fixed4 c = UNITY_SAMPLE_TEX2DARRAY(_MainTex, float3(uv, 0));*/
-            o.Albedo = c.rgb*_Color;
+
+			fixed4 grid = 1;
+            #if defined(GRID_ON)
+			 float2 girdUV = IN.worldPos.xz;
+			 girdUV.x *= 1 / (4 * 8.66025404);
+			 girdUV.y *= 1 / (2 * 15.0);
+		     grid = tex2D(_GridTex, girdUV);
+            #endif
+
+            o.Albedo = c.rgb*grid*_Color;
             o.Metallic = _Metallic;
             o.Smoothness = _Glossiness;
             o.Alpha = c.a;
