@@ -236,27 +236,56 @@ public class HexGrid : MonoBehaviour
         }
     }
 
-    public void FindDistancesTo(HexCell cell)
+    public void FindPath(HexCell fromCell,HexCell toCell)
     {
         StopAllCoroutines();
-        StartCoroutine(Search(cell));
+        StartCoroutine(Search(fromCell,toCell));
     }
 
-    IEnumerator Search(HexCell cell)
+
+    HexCellPriorityQueue searchFrontier;
+
+    IEnumerator Search(HexCell fromCell,HexCell toCell)
     {
+        if(searchFrontier==null)
+        {
+            searchFrontier = new HexCellPriorityQueue();
+        }
+        else
+        {
+            searchFrontier.Clear();
+        }
+
         for(int i=0;i<cells.Length;i++)
         {
             cells[i].Distance = int.MaxValue;
+            cells[i].DisableHighlight();
         }
+        fromCell.EnableHighlight(Color.blue);
+        toCell.EnableHighlight(Color.red);
         WaitForSeconds delay = new WaitForSeconds(1 / 60f);
-        List<HexCell> froniter = new List<HexCell>();
-        cell.Distance = 0;
-        froniter.Add(cell);
-        while(froniter.Count>0)
+        //List<HexCell> froniter = new List<HexCell>();
+        fromCell.Distance = 0;
+        //froniter.Add(fromCell);
+        searchFrontier.Enqueue(fromCell);
+
+        while(searchFrontier.Count>0)
         {
             yield return delay;
-            HexCell current = froniter[0];
-            froniter.RemoveAt(0);
+            HexCell current = searchFrontier.Dequeue();
+            //froniter.RemoveAt(0);
+
+            if(current==toCell)
+            {
+                current = current.PathFrom;
+                while(current!=fromCell)
+                {
+                    current.EnableHighlight(Color.white);
+                    current = current.PathFrom;
+                }
+                break;
+            }
+
             for(HexDirection d=HexDirection.NE;d<=HexDirection.NW;d++)
             {
                 HexCell neighbor = current.GetNeighbor(d);
@@ -290,13 +319,19 @@ public class HexGrid : MonoBehaviour
                 if(neighbor.Distance==int.MaxValue)
                 {
                     neighbor.Distance = distance;
-                    froniter.Add(neighbor);
+                    neighbor.PathFrom = current;
+                    neighbor.SearchHeuristic = neighbor.coordinates.DistanceTo(toCell.coordinates);
+                    //froniter.Add(neighbor);
+                    searchFrontier.Enqueue(neighbor);
                 }
                 else if(distance<neighbor.Distance)
                 {
+                    int oldPriority = neighbor.SearchPriority;
                     neighbor.Distance = distance;
+                    neighbor.PathFrom = current;
+                    searchFrontier.Change(neighbor, oldPriority);
                 }      
-                froniter.Sort((x, y) => x.Distance.CompareTo(y.Distance));
+                //froniter.Sort((x, y) => x.SearchPriority.CompareTo(y.SearchPriority));
             }
         }
         //for(int i=0;i<cells.Length;i++)

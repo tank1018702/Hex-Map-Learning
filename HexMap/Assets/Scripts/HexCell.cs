@@ -123,6 +123,23 @@ public class HexCell : MonoBehaviour
             return transform.localPosition;
         }
     }
+
+    #region PathFind
+    public HexCell PathFrom { get; set; }
+
+    public int SearchHeuristic { get; set; }
+
+    public int SearchPriority
+    {
+        get
+        {
+            return distance + SearchHeuristic;
+        }
+    }
+
+    public HexCell NextWithSamePriority { get; set; }
+
+    #endregion
     #region feature
     public int UrbanLevel
     {
@@ -605,4 +622,18 @@ public class HexCell : MonoBehaviour
         Text label = uiRect.GetComponent<Text>();
         label.text = distance==int.MaxValue?"":distance.ToString();
     }
+    
+    public void DisableHighlight()
+    {
+        Image highlight = uiRect.GetChild(0).GetComponent<Image>();
+        highlight.enabled = false;
+    }
+
+    public void EnableHighlight(Color color)
+    {
+        Image highlight = uiRect.GetChild(0).GetComponent<Image>();
+        highlight.color = color;
+        highlight.enabled = true;
+    }
+
 }
