@@ -11,20 +11,7 @@ public class HexCell : MonoBehaviour
     public HexGridChunk chunk;
     public HexCoordinates coordinates;
 
-    int distance;
-
-    public int Distance
-    {
-        get
-        {
-            return distance;
-        }
-        set
-        {
-            distance = value;
-            UpdateDistanceLabel();
-        }
-    }
+  
 
   
     int terrainTypeIndex;
@@ -125,6 +112,21 @@ public class HexCell : MonoBehaviour
     }
 
     #region PathFind
+    int distance;
+
+    public int Distance
+    {
+        get
+        {
+            return distance;
+        }
+        set
+        {
+            distance = value;
+            //UpdateDistanceLabel();
+        }
+    }
+
     public HexCell PathFrom { get; set; }
 
     public int SearchHeuristic { get; set; }
@@ -138,6 +140,8 @@ public class HexCell : MonoBehaviour
     }
 
     public HexCell NextWithSamePriority { get; set; }
+
+    public int SearchPhase { get; set; }
 
     #endregion
     #region feature
@@ -617,12 +621,18 @@ public class HexCell : MonoBehaviour
         }
     }
 
-    void UpdateDistanceLabel()
+    //void UpdateDistanceLabel()
+    //{
+    //    Text label = uiRect.GetComponent<Text>();
+    //    label.text = distance==int.MaxValue?"":distance.ToString();
+    //}
+
+    public void SetLabel(string text)
     {
         Text label = uiRect.GetComponent<Text>();
-        label.text = distance==int.MaxValue?"":distance.ToString();
+        label.text = text;
     }
-    
+
     public void DisableHighlight()
     {
         Image highlight = uiRect.GetChild(0).GetComponent<Image>();
